@@ -9,6 +9,7 @@ Este proyecto es un sistema completo para la gestión de citas hospitalarias que
 - [Tecnologías Utilizadas](#-tecnologías-utilizadas)
 - [Características Implementadas](#-características-implementadas)
 - [Estructura del Proyecto](#-estructura-del-proyecto)
+- [Estructura de la Base de Datos](#-estructura-de-la-base-de-datos)
 - [Mejoras Implementadas](#-mejoras-implementadas)
 - [Instalación y Ejecución](#-instalación-y-ejecución)
 - [Contribuciones y Desarrollo Futuro](#-contribuciones-y-desarrollo-futuro)
@@ -23,6 +24,7 @@ Este proyecto es un sistema completo para la gestión de citas hospitalarias que
 - **Spring Data JPA** - Persistencia de datos simplificada
 - **MySQL** - Sistema de gestión de base de datos
 - **Maven** - Herramienta para gestión de dependencias
+- **Swagger UI** - Documentación interactiva de la API REST
 
 ### 🖥️ Frontend
 - **Next.js 14** - Framework de React con renderizado del lado del servidor
@@ -95,6 +97,27 @@ hospital-java-demo/
     └── package.json       # Dependencias npm
 ```
 
+## 🗃️ Estructura de la Base de Datos
+
+El sistema utiliza MySQL como gestor de base de datos con un esquema simplificado para lograr un MVP (Producto Mínimo Viable) en el tiempo de desarrollo asignado (4 horas). 
+
+### 📝 Entidades Principales
+
+- **Doctores**: Almacena información básica de los médicos (nombre, apellidos, especialidad)
+- **Pacientes**: Contiene datos básicos de los pacientes (nombre, apellidos)
+- **Consultorios**: Registra información de los consultorios (número, piso)
+- **Citas**: Gestiona las citas médicas relacionando doctores, pacientes y consultorios con restricciones de unicidad para evitar conflictos de horarios
+
+### 💾 Archivos SQL Disponibles
+
+El proyecto incluye dos archivos SQL en la carpeta `backend/src/main/resources/`:
+
+- **data.sql**: Script simple con inserciones básicas de datos para doctores, consultorios y pacientes. Utilizado automáticamente por Spring Boot durante la inicialización.
+
+- **hospital_citas.sql**: Dump completo de MySQL que incluye la estructura detallada de las tablas con todas las restricciones, claves foráneas y datos iniciales. Este archivo es más completo y se recomienda para entornos de desarrollo o producción donde se necesite la estructura exacta de la base de datos.
+
+> **Nota**: La estructura de datos fue intencionalmente simplificada para priorizar la funcionalidad básica del sistema. En un entorno de producción, se recomendaría expandir el modelo con campos adicionales como información de contacto, historial médico, etc.
+
 ## 🚀 Mejoras Implementadas
 
 ### 🎯 UI/UX
@@ -127,6 +150,13 @@ hospital-java-demo/
 2. Navegar al directorio `backend`
 3. Ejecutar `mvn clean install` para instalar dependencias
 4. Ejecutar `mvn spring-boot:run` para iniciar el servidor
+   - El sistema utiliza Spring Boot para crear e inicializar automáticamente la base de datos
+   - Se incluyen dos archivos SQL en el proyecto:
+     - `data.sql`: Script simple con datos iniciales básicos
+     - `hospital_citas.sql`: Dump completo de MySQL con estructura detallada y datos
+   - Por defecto, Spring Boot utilizará `data.sql` para la inicialización
+   - Para usar `hospital_citas.sql`, importarlo manualmente en MySQL antes de iniciar la aplicación
+5. Acceder a Swagger UI en `http://localhost:8080/swagger-ui.html` para probar la API REST
 
 ### 🖥️ Frontend
 1. Navegar al directorio `frontend`
