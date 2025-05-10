@@ -147,6 +147,13 @@ El proyecto incluye dos archivos SQL en la carpeta `backend/src/main/resources/`
 
 ### ⚙️ Backend
 1. Configurar la base de datos en `application.properties`
+   - **¡IMPORTANTE!** Por seguridad, las credenciales de la base de datos deben configurarse utilizando variables de entorno
+   - El sistema está configurado para utilizar las siguientes variables:
+     - `MYSQL_URL`: URL de conexión a la base de datos MySQL
+     - `MYSQL_USERNAME`: Nombre de usuario de MySQL
+     - `MYSQL_PASSWORD`: Contraseña de MySQL
+   - Estas variables se pueden configurar en el sistema o en un archivo `.env` (no incluido en el repositorio)
+   - Si no se proporcionan, se usarán los valores por defecto especificados en `application.properties`
 2. Navegar al directorio `backend`
 3. Ejecutar `mvn clean install` para instalar dependencias
 4. Ejecutar `mvn spring-boot:run` para iniciar el servidor
